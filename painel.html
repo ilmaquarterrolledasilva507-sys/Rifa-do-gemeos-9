@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -6,10 +6,20 @@
 <title>🔐 Painel — Rifa do Gêmeos</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-:root{--primario:#e11d48;--sucesso:#16a34a;--alerta:#f59e0b;--perigo:#dc2626;--escuro:#1f2937;--fundo:#f3f4f6}
+:root{--primario:#00337A;--sucesso:#009E5F;--alerta:#F59E0B;--perigo:#DC2626;--escuro:#1F2937;--fundo:#F3F4F6}
 body{background:var(--fundo);padding:15px;min-height:100vh}
-.container{max-width:1000px;margin:0 auto}
 
+/* TELA DE LOGIN */
+.tela-login{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#fff;padding:35px 25px;border-radius:20px;width:90%;max-width:380px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.login-box h2{color:var(--primario);margin-bottom:25px;font-size:22px}
+.login-box input{width:100%;padding:15px;border:2px solid #E5E7EB;border-radius:10px;font-size:18px;text-align:center;margin-bottom:20px;outline:none}
+.login-box input:focus{border-color:var(--primario)}
+.btn-entrar{width:100%;padding:15px;background:var(--primario);color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer}
+.erro{color:var(--perigo);margin-top:15px;display:none}
+
+/* RESTO DO ESTILO */
+.container{max-width:1000px;margin:0 auto;display:none}
 header{background:#fff;padding:25px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
 h1{color:var(--escuro);font-size:22px}
 .sair{color:#64748b;text-decoration:none;font-size:14px}
@@ -31,36 +41,42 @@ h1{color:var(--escuro);font-size:22px}
 .pedido-cabecalho{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:10px}
 .pedido-nome{font-weight:bold;font-size:17px;color:var(--escuro)}
 .pedido-tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
-.tag-pendente{background:#fef3c7;color:#92400e}
-.tag-liberado{background:#d1fae5;color:#065f46}
+.tag-pendente{background:#FEF3C7;color:#92400E}
+.tag-liberado{background:#D1FAE5;color:#065F46}
 .pedido-dados{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
 @media(max-width:700px){.pedido-dados{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.pedido-dados{grid-template-columns:1fr}}
-.dado-label{font-size:12px;color:#9ca3af}
+.dado-label{font-size:12px;color:#9CA3AF}
 .dado-valor{font-size:15px;color:var(--escuro)}
-.numeros-area{background:#f0fdf4;padding:12px;border-radius:8px;margin:12px 0}
+.numeros-area{background:#F0FDF4;padding:12px;border-radius:8px;margin:12px 0}
 .numeros-titulo{font-size:14px;font-weight:bold;color:#166534;margin-bottom:8px}
 .numeros-lista{font-size:16px;font-weight:600;letter-spacing:2px;color:#166534}
 .acoes{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
 .btn-liberar{background:var(--sucesso);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer}
-.btn-whatsapp{background:#25d366;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn-whatsapp{background:#25D366;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
 .btn-excluir{background:var(--perigo);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer}
-.vazio{text-align:center;padding:50px;color:#9ca3af}
+.vazio{text-align:center;padding:50px;color:#9CA3AF}
 .notificacao{position:fixed;top:20px;right:20px;background:var(--sucesso);color:#fff;padding:15px 25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:9999;display:none}
 
-@media(max-width:900px){
-  .cards{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:600px){
-  .cards{grid-template-columns:1fr 1fr}
-}
+@media(max-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.cards{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
+<!-- 🔒 TELA DE SENHA -- SÓ VOCÊ SABE! -->
+<div class="tela-login" id="telaLogin">
+  <div class="login-box">
+    <h2>🔐 Acesso Restrito</h2>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button class="btn-entrar" onclick="verificarSenha()">Entrar</button>
+    <p class="erro" id="erroSenha">❌ Senha incorreta!</p>
+  </div>
+</div>
+
 <div class="notificacao" id="notif">🔔 Novo pedido recebido!</div>
 
-<div class="container">
+<div class="container" id="conteudoPainel">
   <header>
     <div>
       <h1>🔐 Painel Administrativo</h1>
@@ -99,19 +115,39 @@ h1{color:var(--escuro);font-size:22px}
 </div>
 
 <script>
-let pedidos = JSON.parse(localStorage.getItem('pedidosRifa') || '[]');
+// 🔑 SENHA DO PAINEL — ALTERE AQUI SE QUISER!
+const SENHA_CORRETA = '123456'; // ← Pode trocar por uma senha sua!
+
+function verificarSenha() {
+  const senhaDigitada = document.getElementById('senha').value;
+  if(senhaDigitada === SENHA_CORRETA) {
+    document.getElementById('telaLogin').style.display = 'none';
+    document.getElementById('conteudoPainel').style.display = 'block';
+    inicializarPainel();
+  } else {
+    document.getElementById('erroSenha').style.display = 'block';
+  }
+}
+
+// Funções do painel
+let pedidos = [];
 let filtroAtual = 'todos';
 
-// Escutar novos pedidos
-window.addEventListener('message', (event) => {
-  if(event.data.tipo === 'novoPedido') {
-    pedidos.unshift(event.data.pedido);
-    salvar();
-    renderizar();
-    atualizarCards();
-    mostrarNotificacao();
-  }
-});
+function inicializarPainel() {
+  pedidos = JSON.parse(localStorage.getItem('pedidosRifa') || '[]');
+  renderizar();
+  atualizarCards();
+  
+  window.addEventListener('message', (event) => {
+    if(event.data.tipo === 'novoPedido') {
+      pedidos.unshift(event.data.pedido);
+      salvar();
+      renderizar();
+      atualizarCards();
+      mostrarNotificacao();
+    }
+  });
+}
 
 function mostrarNotificacao() {
   const n = document.getElementById('notif');
@@ -119,7 +155,6 @@ function mostrarNotificacao() {
   setTimeout(() => n.style.display = 'none', 5000);
 }
 
-// Gerar 6 números aleatórios únicos
 function gerarNumeros(qtd) {
   const todos = [];
   for(let i=0; i<qtd; i++) {
@@ -135,24 +170,21 @@ function gerarNumeros(qtd) {
 function liberarPedido(id) {
   const pedido = pedidos.find(p => p.id === id);
   if(!pedido) return;
-
   pedido.status = 'liberado';
   pedido.numeros = gerarNumeros(pedido.quantidade);
   salvar();
   renderizar();
   atualizarCards();
-
-  // Abrir WhatsApp com mensagem pronta
+  
   const numerosTexto = pedido.numeros.map((n,i) => `Cota ${i+1}: ${n}`).join('\n');
   const mensagem = `✅ Olá ${pedido.nome}! Seu pagamento foi confirmado! 🎉\n\nSeus números da sorte:\n${numerosTexto}\n\n📌 Sorteio pela Loteria Federal — Boa sorte!🍀`;
   const url = `https://wa.me/55${pedido.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(mensagem)}`;
-  
   setTimeout(() => window.open(url, '_blank'), 500);
-  alert('✅ Pedido liberado! O WhatsApp vai abrir com a mensagem pronta!');
+  alert('✅ Pedido liberado! WhatsApp vai abrir com a mensagem!');
 }
 
 function excluirPedido(id) {
-  if(!confirm('Tem certeza que deseja excluir?')) return;
+  if(!confirm('Tem certeza?')) return;
   pedidos = pedidos.filter(p => p.id !== id);
   salvar();
   renderizar();
@@ -179,17 +211,14 @@ function atualizarCards() {
 function renderizar() {
   const el = document.getElementById('listaPedidos');
   let filtrados = filtroAtual === 'todos' ? pedidos : pedidos.filter(p => p.status === filtroAtual);
-
   if(filtrados.length === 0) {
     el.innerHTML = '<p class="vazio">Nenhum pedido encontrado.</p>';
     return;
   }
-
   el.innerHTML = filtrados.map(p => {
     const numerosHtml = p.status === 'liberado' 
       ? `<div class="numeros-area"><div class="numeros-titulo">🎯 Números Gerados:</div>${p.numeros.map((n,i) => `<div class="numeros-lista">Cota ${i+1}: ${n}</div>`).join('')}</div>`
       : '';
-
     return `
       <div class="pedido">
         <div class="pedido-cabecalho">
@@ -199,18 +228,9 @@ function renderizar() {
           </span>
         </div>
         <div class="pedido-dados">
-          <div>
-            <div class="dado-label">CPF</div>
-            <div class="dado-valor">${p.cpf}</div>
-          </div>
-          <div>
-            <div class="dado-label">WhatsApp</div>
-            <div class="dado-valor">${p.whatsapp}</div>
-          </div>
-          <div>
-            <div class="dado-label">Valor / Cotas</div>
-            <div class="dado-valor">R$ ${p.valor} / ${p.quantidade}x</div>
-          </div>
+          <div><div class="dado-label">CPF</div><div class="dado-valor">${p.cpf}</div></div>
+          <div><div class="dado-label">WhatsApp</div><div class="dado-valor">${p.whatsapp}</div></div>
+          <div><div class="dado-label">Valor / Cotas</div><div class="dado-valor">R$ ${p.valor} / ${p.quantidade}x</div></div>
         </div>
         <div style="font-size:13px;color:#9ca3af;margin-top:5px">${p.data}</div>
         ${numerosHtml}
@@ -225,12 +245,6 @@ function renderizar() {
     `;
   }).join('');
 }
-
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-  renderizar();
-  atualizarCards();
-});
 </script>
 
 </body>
