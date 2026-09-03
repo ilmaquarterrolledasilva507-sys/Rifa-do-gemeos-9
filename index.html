@@ -15,7 +15,7 @@ body{background:linear-gradient(180deg,#00337A 0%,#002255 100%);min-height:100vh
 .header h1{font-size:32px;font-weight:800;margin-bottom:8px}
 .header p{font-size:16px;opacity:.85}
 
-/* IMAGEM PRÊMIOS — ✅ FOTO QUE VOCÊ MANDOU! */
+/* IMAGEM PRÊMIOS — ✅ FOTO CERTA! */
 .img-premio{width:calc(100% - 40px);max-width:420px;margin:15px auto;border-radius:16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.2);object-fit:cover}
 
 /* VALOR DESTAQUE */
@@ -79,8 +79,8 @@ input:focus{border-color:var(--primario)}
   <p>Escolha a quantidade de cotas e participe!</p>
 </header>
 
-<!-- ✅ FOTO NOVA — JÁ COLOCADA! -->
-<img src="https://i.ibb.co/Xf2L6V2h/Screenshot-20260901-183026-Qwen.webp" alt="Prêmios Rifa do Gêmeos" class="img-premio">
+<!-- ✅ FOTO CERTA — JÁ COLOCADA! -->
+<img src="https://i.ibb.co/kVRx8YHN/Screenshot-20260903-125215-Instagram-Lite-1.webp" alt="Prêmios Rifa do Gêmeos" class="img-premio">
 
 <div class="valor-destaque">
   <p class="valor-texto">Por apenas</p>
@@ -157,7 +157,6 @@ document.querySelectorAll('.qtd-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     quantidade = parseInt(btn.dataset.qtd);
     atualizarTudo();
-    // Marcar selecionado
     document.querySelectorAll('.qtd-btn').forEach(b => b.classList.remove('selecionado'));
     btn.classList.add('selecionado');
   });
@@ -166,7 +165,6 @@ document.querySelectorAll('.qtd-btn').forEach(btn => {
 // Contador manual
 function alterar(n) {
   quantidade = Math.max(0, quantidade + n);
-  // Desmarcar botões pré-selecionados
   document.querySelectorAll('.qtd-btn').forEach(b => b.classList.remove('selecionado'));
   atualizarTudo();
 }
