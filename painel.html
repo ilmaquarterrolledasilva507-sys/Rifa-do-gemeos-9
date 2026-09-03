@@ -64,7 +64,7 @@ h1{color:var(--escuro);font-size:22px}
 </head>
 <body>
 
-<!-- 🔒 TELA DE SENHA -- SÓ VOCÊ SABE! -->
+<!-- 🔒 TELA DE SENHA -->
 <div class="tela-login" id="telaLogin">
   <div class="login-box">
     <h2>🔐 Acesso Restrito</h2>
@@ -115,8 +115,8 @@ h1{color:var(--escuro);font-size:22px}
 </div>
 
 <script>
-// 🔑 SENHA DO PAINEL — ALTERE AQUI SE QUISER!
-const SENHA_CORRETA = '251518'; // ← Pode trocar por uma senha sua!
+// 🔑 SENHA — ALTERE AQUI SE QUISER!
+const SENHA_CORRETA = '251518'; // ← Troque por sua senha!
 
 function verificarSenha() {
   const senhaDigitada = document.getElementById('senha').value;
@@ -129,7 +129,6 @@ function verificarSenha() {
   }
 }
 
-// Funções do painel
 let pedidos = [];
 let filtroAtual = 'todos';
 
