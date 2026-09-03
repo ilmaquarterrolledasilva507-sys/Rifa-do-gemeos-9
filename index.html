@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
@@ -15,8 +15,8 @@ body{background:linear-gradient(180deg,#00337A 0%,#002255 100%);min-height:100vh
 .header h1{font-size:32px;font-weight:800;margin-bottom:8px}
 .header p{font-size:16px;opacity:.85}
 
-/* IMAGEM PRÊMIOS */
-.img-premio{width:calc(100% - 40px);max-width:420px;margin:15px auto;border-radius:16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+/* IMAGEM PRÊMIOS — ✅ FOTO QUE VOCÊ MANDOU! */
+.img-premio{width:calc(100% - 40px);max-width:420px;margin:15px auto;border-radius:16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.2);object-fit:cover}
 
 /* VALOR DESTAQUE */
 .valor-destaque{text-align:center;margin:20px 0}
@@ -79,7 +79,8 @@ input:focus{border-color:var(--primario)}
   <p>Escolha a quantidade de cotas e participe!</p>
 </header>
 
-<img src="https://i.ibb.co/TqpyCkXR/20260830-6a944555c5deb.webp" alt="Prêmios: 4 T-Cross + 4 Moto CG 160" class="img-premio">
+<!-- ✅ FOTO QUE VOCÊ MANDOU — JÁ COLOCADA! -->
+<img src="https://i.ibb.co/TqpyCkXR/20260830-6a944555c5deb.webp" alt="Prêmios: 4 Motos + Carros T-Cross" class="img-premio">
 
 <div class="valor-destaque">
   <p class="valor-texto">Por apenas</p>
@@ -215,7 +216,7 @@ function gerarPix() {
   // Salvar
   const pedidos = JSON.parse(localStorage.getItem('pedidosRifa') || '[]');
   pedidos.unshift(pedido);
-  localStorage.setItem('pedidosRifa', JSON.stringify(pedidos));
+  localStorage.setItem('pedidosRifa', JSON.stringify(pedido));
 
   // Mostrar Pix
   document.getElementById('valorPix').textContent = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
@@ -233,3 +234,4 @@ function copiarChave() {
 
 </body>
 </html>
+  
