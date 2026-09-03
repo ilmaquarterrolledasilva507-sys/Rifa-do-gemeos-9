@@ -6,102 +6,106 @@
 <title>🎁 Rifa do Gêmeos — 4 T-Cross + 4 Moto CG 160</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-:root{--primario:#e11d48;--dourado:#f59e0b;--sucesso:#16a34a;--escuro:#1f2937;--fundo:#f8fafc}
-body{background:linear-gradient(135deg,#fff5f7,#fff);min-height:100vh;padding-bottom:100px}
+:root{--primario:#00337A;--destaque:#009E5F;--alerta:#F59E0B;--claro:#F8FAFC;--escuro:#1E293B;--cinza:#E2E8F0}
+body{background:linear-gradient(180deg,#00337A 0%,#002255 100%);min-height:100vh;padding-bottom:40px;color:#fff}
 
 /* CABEÇALHO */
-.header{background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;padding:25px 20px;text-align:center}
-.header h1{font-size:26px;margin-bottom:5px}
-.header p{opacity:.95;font-size:15px}
+.header{padding:25px 20px 10px;text-align:center}
+.edicao{background:rgba(255,255,255,.15);padding:6px 14px;border-radius:20px;font-size:14px;display:inline-block;margin-bottom:12px}
+.header h1{font-size:32px;font-weight:800;margin-bottom:8px}
+.header p{font-size:16px;opacity:.85}
 
-/* IMAGEM DOS PRÊMIOS — FOTO QUE VOCÊ MANDOU */
-.img-premio{
-  width:100%;
-  max-width:500px;
-  margin:20px auto;
-  border-radius:16px;
-  box-shadow:0 8px 24px rgba(0,0,0,.15);
-  display:block;
-  object-fit:cover;
-}
+/* IMAGEM PRÊMIOS */
+.img-premio{width:calc(100% - 40px);max-width:420px;margin:15px auto;border-radius:16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 
-.premios{background:#fff;margin:20px;padding:20px;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.05);max-width:480px;margin-left:auto;margin-right:auto}
-.premios h2{text-align:center;color:var(--escuro);font-size:20px;margin-bottom:15px}
-.premio-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f1f5f9}
-.premio-item:last-child{border-bottom:none}
-.premio-icone{font-size:28px}
-.premio-texto{font-size:16px;color:var(--escuro);font-weight:500}
+/* VALOR DESTAQUE */
+.valor-destaque{text-align:center;margin:20px 0}
+.valor-texto{font-size:20px;opacity:.9}
+.valor-preco{display:inline-block;background:#fff;color:var(--primario);padding:10px 25px;border-radius:50px;font-size:32px;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+.valor-unidade{font-size:14px;opacity:.75;margin-top:5px}
 
-.valor-cota{text-align:center;margin:20px 0}
-.valor-cota span{font-size:32px;font-weight:bold;color:var(--primario)}
-.valor-cota small{color:#64748b;font-size:15px}
+/* BOTÕES DE QUANTIDADE */
+.quantidade-section{padding:0 20px;margin-top:25px}
+.qtd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:25px}
+.qtd-btn{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);color:#fff;border-radius:12px;padding:15px 10px;font-size:20px;font-weight:bold;cursor:pointer;transition:all .2s}
+.qtd-btn:nth-child(3){background:var(--destaque);border-color:var(--destaque);position:relative}
+.qtd-btn:nth-child(3)::after{content:'POPULAR';position:absolute;top:-10px;right:10px;background:var(--alerta);color:#000;font-size:10px;font-weight:bold;padding:2px 6px;border-radius:4px}
+.qtd-btn.selecionado{background:#fff;color:var(--primario);border-color:#fff}
+.qtd-btn span{display:block;font-size:13px;font-weight:normal;margin-top:4px;opacity:.8}
 
-.compra{background:#fff;margin:20px;padding:25px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.08);max-width:480px;margin-left:auto;margin-right:auto}
-.compra h2{text-align:center;color:var(--escuro);font-size:20px;margin-bottom:20px}
-.grupo{margin-bottom:15px}
-label{display:block;margin-bottom:6px;color:#475569;font-weight:500}
-input,select{width:100%;padding:14px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:16px;outline:none}
-input:focus,select:focus{border-color:var(--primario)}
-.quantidade{display:flex;gap:10px;align-items:center}
-.qtd-btn{width:50px;height:50px;border:none;background:#f1f5f9;border-radius:10px;font-size:22px;cursor:pointer;color:var(--escuro)}
-.qtd-val{flex:1;text-align:center;font-size:22px;font-weight:bold;padding:10px;border:2px solid #e2e8f0;border-radius:10px}
-.btn-comprar{width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--primario),#be123c);color:#fff;font-size:18px;font-weight:bold;cursor:pointer;margin-top:10px;box-shadow:0 4px 12px rgba(225,29,72,.3)}
+/* CONTADOR MANUAL */
+.contador{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:25px}
+.cont-btn{width:55px;height:55px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cont-val{font-size:32px;font-weight:bold;min-width:60px;text-align:center}
+
+/* FORMULÁRIO */
+.form-section{background:#fff;border-radius:24px 24px 0 0;padding:30px 20px;margin-top:10px;color:var(--escuro)}
+.form-section h2{font-size:18px;margin-bottom:20px;color:var(--escuro)}
+.grupo{margin-bottom:16px}
+label{display:block;margin-bottom:6px;color:#475569;font-weight:500;font-size:15px}
+input{width:100%;padding:14px 16px;border:2px solid var(--cinza);border-radius:10px;font-size:16px;outline:none;transition:border .2s}
+input:focus{border-color:var(--primario)}
+
+/* TOTAL E BOTÃO FINAL */
+.total-area{display:flex;justify-content:space-between;align-items:center;margin:25px 0 15px;padding-top:15px;border-top:1px solid #eee}
+.total-label{font-size:18px;font-weight:600}
+.total-valor{font-size:24px;font-weight:bold;color:var(--destaque)}
+.btn-comprar{width:100%;padding:18px;border:none;border-radius:12px;background:var(--destaque);color:#fff;font-size:19px;font-weight:bold;cursor:pointer;box-shadow:0 4px 12px rgba(0,158,95,.3);transition:transform .1s}
 .btn-comprar:active{transform:scale(.98)}
 
 /* PIX */
-.pix-area{display:none;text-align:center;padding:10px 0}
-.qr-code{width:220px;height:220px;margin:15px auto;background:#f1f5f9;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#64748b}
-.chave-pix{background:#fef2f2;padding:12px;border-radius:10px;margin:12px 0;word-break:break-all;font-size:14px;color:#991b1b}
-.aviso{background:#fef3c7;padding:15px;border-radius:10px;color:#92400e;margin-top:15px;line-height:1.6}
-.btn-copiar{background:var(--primario);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
-.copiado{background:var(--sucesso)}
+.pix-area{display:none;margin-top:25px;text-align:center}
+.pix-box{background:#F0FDF4;padding:25px;border-radius:16px;margin-top:15px}
+.qr-code{width:220px;height:220px;margin:0 auto 15px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed #CCC}
+.chave-pix{background:#E0F2FE;padding:12px;border-radius:8px;word-break:break-all;font-size:14px;color:#0C4A6E;margin:12px 0}
+.btn-copiar{background:var(--primario);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:15px}
+.aviso{background:#FEF3C7;padding:15px;border-radius:10px;color:#92400E;margin-top:15px;line-height:1.6}
 
-.info-sorteio{background:#f0f9ff;padding:15px;border-radius:10px;color:#0c4a6e;margin-top:20px;font-size:14px;line-height:1.6}
+/* LINK PAINEL */
+.link-painel{text-align:center;margin-top:30px;font-size:13px}
+.link-painel a{color:#94A3B8;text-decoration:none}
 
 @media(max-width:480px){
-  .header h1{font-size:22px}
-  .compra,.premios{margin:15px;border-radius:12px}
+  .header h1{font-size:26px}
+  .qtd-btn{padding:12px 8px;font-size:18px}
 }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <h1>🎁 RIFA DO GÊMEOS</h1>
-  <p>4 × T-Cross 0km + 4 × Moto CG 160 0km</p>
+  <span class="edicao">EDIÇÃO 001</span>
+  <h1>RIFA DO GÊMEOS</h1>
+  <p>Escolha a quantidade de cotas e participe!</p>
 </header>
 
-<!-- ✅ FOTO QUE VOCÊ MANDOU — JÁ COLOCADA AQUI! -->
-<img src="https://i.ibb.co/bMzF3LMW/Screenshot-20260903-125215-Instagram-Lite-1.webp" alt="Prêmios: 4 T-Cross + 4 Moto CG 160" class="img-premio">
+<img src="https://i.ibb.co/TqpyCkXR/20260830-6a944555c5deb.webp" alt="Prêmios: 4 T-Cross + 4 Moto CG 160" class="img-premio">
 
-<section class="premios">
-  <h2>🏆 Prêmios</h2>
-  <div class="premio-item">
-    <span class="premio-icone">🚗</span>
-    <span class="premio-texto">4 × Volkswagen T-Cross 0km</span>
+<div class="valor-destaque">
+  <p class="valor-texto">Por apenas</p>
+  <div class="valor-preco">R$ 1,20</div>
+  <p class="valor-unidade">por cota</p>
+</div>
+
+<section class="quantidade-section">
+  <div class="qtd-grid">
+    <button class="qtd-btn" data-qtd="1">+1 <span>Selecionar</span></button>
+    <button class="qtd-btn" data-qtd="2">+2 <span>Selecionar</span></button>
+    <button class="qtd-btn" data-qtd="3">+3 <span>Selecionar</span></button>
+    <button class="qtd-btn" data-qtd="5">+5 <span>Selecionar</span></button>
+    <button class="qtd-btn" data-qtd="10">+10 <span>Selecionar</span></button>
+    <button class="qtd-btn" data-qtd="15">+15 <span>Selecionar</span></button>
   </div>
-  <div class="premio-item">
-    <span class="premio-icone">🏍️</span>
-    <span class="premio-texto">4 × Moto CG 160 0km</span>
+
+  <div class="contador">
+    <button class="cont-btn" onclick="alterar(-1)">−</button>
+    <span class="cont-val" id="contValor">0</span>
+    <button class="cont-btn" onclick="alterar(+1)">+</button>
   </div>
 </section>
 
-<div class="valor-cota">
-  <small>Valor de cada cota:</small><br>
-  <span>R$ 1,20</span>
-</div>
-
-<section class="compra" id="formCompra">
-  <h2>🛒 Escolha suas cotas</h2>
-  
-  <div class="grupo">
-    <label>Quantidade de cotas</label>
-    <div class="quantidade">
-      <button class="qtd-btn" onclick="alterarQtd(-1)">−</button>
-      <input type="number" id="quantidade" value="1" min="1" readonly class="qtd-val">
-      <button class="qtd-btn" onclick="alterarQtd(1)">+</button>
-    </div>
-  </div>
+<section class="form-section" id="formArea">
+  <h2>📝 Seus Dados</h2>
 
   <div class="grupo">
     <label>Nome Completo *</label>
@@ -118,60 +122,61 @@ input:focus,select:focus{border-color:var(--primario)}
     <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" maxlength="15" required oninput="mascaraWhatsapp(this)">
   </div>
 
-  <div class="grupo">
-    <label style="font-size:18px;color:var(--primario)">Total: <span id="total">R$ 1,20</span></label>
+  <div class="total-area">
+    <span class="total-label">Total</span>
+    <span class="total-valor" id="totalFinal">R$ 0,00</span>
   </div>
 
-  <button class="btn-comprar" onclick="gerarPix()">💳 Comprar e Gerar Pix</button>
+  <button class="btn-comprar" onclick="gerarPix()">GARANTIR NÚMEROS</button>
 
-  <!-- ÁREA DO PIX — APARECE APÓS CLICAR EM COMPRAR -->
+  <!-- ÁREA DO PIX -->
   <div class="pix-area" id="pixArea">
-    <h3>✅ Pix Gerado — Faça o Pagamento</h3>
-    <p style="color:#64748b;margin:10px 0">Valor: <strong id="valorPix">R$ 1,20</strong></p>
-    
-    <div class="qr-code" id="qrCode">
-      QR Code Pix<br>
-      (copie a chave abaixo)
-    </div>
-
-    <p style="font-weight:bold;margin-top:15px">Chave Pix:</p>
-    <div class="chave-pix" id="chavePix">6de118d7-4af2-4520-bda0-e59ea5b41731</div>
-    <button class="btn-copiar" onclick="copiarChave()">📋 Copiar Chave Pix</button>
-
-    <div class="aviso">
-      ⏳ <strong>Após fazer o pagamento:</strong><br>
-      Aguarde a confirmação. Assim que confirmarmos, você receberá os números da sorte no seu WhatsApp automaticamente!
-    </div>
-
-    <div class="info-sorteio">
-      📌 <strong>Sobre o sorteio:</strong><br>
-      O sorteio será realizado com base no resultado da <strong>Loteria Federal</strong>. Os números são gerados aleatoriamente pelo sistema.
+    <h3>✅ Pagamento via Pix</h3>
+    <div class="pix-box">
+      <div class="qr-code">QR Code<br>Pix</div>
+      <p><strong>Valor:</strong> <span id="valorPix">R$ 0,00</span></p>
+      <p style="margin-top:15px;font-weight:bold;">Chave Pix:</p>
+      <div class="chave-pix" id="chavePix">6de118d7-4af2-4520-bda0-e59ea5b41731</div>
+      <button class="btn-copiar" onclick="copiarChave()">📋 Copiar Chave Pix</button>
+      <div class="aviso">
+        ⏳ Após o pagamento, aguarde a confirmação. Assim que confirmarmos, você receberá os números no seu WhatsApp!
+      </div>
     </div>
   </div>
 </section>
 
-<!-- LINK PARA O PAINEL ADMINISTRATIVO -->
-<p style="text-align:center;margin-top:30px;font-size:13px;color:#94a3b8">
-  <a href="painel.html" style="color:#94a3b8;text-decoration:none">🔐 Painel Administrativo</a>
-</p>
+<p class="link-painel"><a href="painel.html">🔐 Painel Administrativo</a></p>
 
 <script>
 const VALOR_COTA = 1.20;
-let qtd = 1;
+let quantidade = 0;
 
-// Atualizar total
-function atualizarTotal() {
-  document.getElementById('quantidade').value = qtd;
-  const total = (qtd * VALOR_COTA).toFixed(2).replace('.', ',');
-  document.getElementById('total').textContent = `R$ ${total}`;
+// Botões de quantidade rápida
+document.querySelectorAll('.qtd-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    quantidade = parseInt(btn.dataset.qtd);
+    atualizarTudo();
+    // Marcar selecionado
+    document.querySelectorAll('.qtd-btn').forEach(b => b.classList.remove('selecionado'));
+    btn.classList.add('selecionado');
+  });
+});
+
+// Contador manual
+function alterar(n) {
+  quantidade = Math.max(0, quantidade + n);
+  // Desmarcar botões pré-selecionados
+  document.querySelectorAll('.qtd-btn').forEach(b => b.classList.remove('selecionado'));
+  atualizarTudo();
 }
 
-function alterarQtd(n) {
-  qtd = Math.max(1, qtd + n);
-  atualizarTotal();
+function atualizarTudo() {
+  document.getElementById('contValor').textContent = quantidade;
+  const total = (quantidade * VALOR_COTA).toFixed(2).replace('.', ',');
+  document.getElementById('totalFinal').textContent = `R$ ${total}`;
 }
 
-// Máscara CPF
+// Máscaras
 function mascaraCPF(i) {
   let v = i.value.replace(/\D/g,'');
   if(v.length > 11) v = v.slice(0,11);
@@ -180,8 +185,6 @@ function mascaraCPF(i) {
   v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
   i.value = v;
 }
-
-// Máscara WhatsApp
 function mascaraWhatsapp(i) {
   let v = i.value.replace(/\D/g,'');
   if(v.length > 11) v = v.slice(0,11);
@@ -190,64 +193,41 @@ function mascaraWhatsapp(i) {
   i.value = v;
 }
 
-// Gerar Pix e Salvar Pedido
+// Gerar Pix
 function gerarPix() {
+  if(quantidade < 1) { alert('⚠️ Escolha pelo menos 1 cota!'); return; }
   const nome = document.getElementById('nome').value.trim();
   const cpf = document.getElementById('cpf').value.trim();
   const whatsapp = document.getElementById('whatsapp').value.trim();
+  
+  if(!nome || !cpf || !whatsapp) { alert('⚠️ Preencha Nome, CPF e WhatsApp!'); return; }
+  if(cpf.replace(/\D/g,'').length !== 11) { alert('⚠️ CPF inválido!'); return; }
+  if(whatsapp.replace(/\D/g,'').length < 11) { alert('⚠️ WhatsApp inválido!'); return; }
 
-  if(!nome || !cpf || !whatsapp) {
-    alert('⚠️ Preencha todos os campos: Nome, CPF e WhatsApp!');
-    return;
-  }
-  if(cpf.replace(/\D/g,'').length !== 11) {
-    alert('⚠️ CPF inválido!');
-    return;
-  }
-  if(whatsapp.replace(/\D/g,'').length < 11) {
-    alert('⚠️ WhatsApp inválido!');
-    return;
-  }
-
-  const valorTotal = qtd * VALOR_COTA;
+  const valorTotal = quantidade * VALOR_COTA;
   const pedido = {
-    id: Date.now(),
-    nome,
-    cpf,
-    whatsapp,
-    quantidade: qtd,
+    id: Date.now(), nome, cpf, whatsapp, quantidade,
     valor: valorTotal.toFixed(2),
     data: new Date().toLocaleString('pt-BR'),
-    status: 'pendente',
-    numeros: []
+    status: 'pendente', numeros: []
   };
 
-  // Salvar no banco local
+  // Salvar
   const pedidos = JSON.parse(localStorage.getItem('pedidosRifa') || '[]');
   pedidos.unshift(pedido);
   localStorage.setItem('pedidosRifa', JSON.stringify(pedidos));
 
-  // Mostrar área do Pix
+  // Mostrar Pix
   document.getElementById('valorPix').textContent = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
   document.getElementById('pixArea').style.display = 'block';
-  document.getElementById('formCompra').scrollIntoView({behavior:'smooth'});
+  document.getElementById('pixArea').scrollIntoView({behavior:'smooth'});
 
-  // Notificação pro painel
   window.postMessage({tipo:'novoPedido', pedido}, '*');
 }
 
-// Copiar chave Pix
 function copiarChave() {
   navigator.clipboard.writeText('6de118d7-4af2-4520-bda0-e59ea5b41731')
-    .then(() => {
-      const btn = event.target;
-      btn.textContent = '✅ Copiado!';
-      btn.classList.add('copiado');
-      setTimeout(() => {
-        btn.textContent = '📋 Copiar Chave Pix';
-        btn.classList.remove('copiado');
-      }, 3000);
-    });
+    .then(() => alert('✅ Chave copiada!'));
 }
 </script>
 
