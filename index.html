@@ -15,7 +15,7 @@ body{background:linear-gradient(180deg,#00337A 0%,#002255 100%);min-height:100vh
 .header h1{font-size:32px;font-weight:800;margin-bottom:8px}
 .header p{font-size:16px;opacity:.85}
 
-/* IMAGEM PRÊMIOS — ✅ FOTO CERTA! */
+/* IMAGEM PRÊMIOS */
 .img-premio{width:calc(100% - 40px);max-width:420px;margin:15px auto;border-radius:16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.2);object-fit:cover}
 
 /* VALOR DESTAQUE */
@@ -56,13 +56,11 @@ input:focus{border-color:var(--primario)}
 /* PIX */
 .pix-area{display:none;margin-top:25px;text-align:center}
 .pix-box{background:#F0FDF4;padding:25px;border-radius:16px;margin-top:15px}
-.qr-code{width:220px;height:220px;margin:0 auto 15px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed #CCC}
+.qr-code{width:220px;height:220px;margin:0 auto 15px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10px}
+.qr-code img{width:100%;height:100%;border-radius:8px;object-fit:contain}
 .chave-pix{background:#E0F2FE;padding:12px;border-radius:8px;word-break:break-all;font-size:14px;color:#0C4A6E;margin:12px 0}
 .btn-copiar{background:var(--primario);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:15px}
 .aviso{background:#FEF3C7;padding:15px;border-radius:10px;color:#92400E;margin-top:15px;line-height:1.6}
-
-/* LINK PAINEL */
-.link-painel{text-align:center;margin-top:30px;font-size:13px
 
 @media(max-width:480px){
   .header h1{font-size:26px}
@@ -78,7 +76,7 @@ input:focus{border-color:var(--primario)}
   <p>Escolha a quantidade de cotas e participe!</p>
 </header>
 
-<!-- ✅ FOTO CERTA — JÁ COLOCADA! -->
+<!-- ✅ FOTO CERTA -->
 <img src="https://i.ibb.co/kVRx8YHN/Screenshot-20260903-125215-Instagram-Lite-1.webp" alt="Prêmios Rifa do Gêmeos" class="img-premio">
 
 <div class="valor-destaque">
@@ -129,11 +127,14 @@ input:focus{border-color:var(--primario)}
 
   <button class="btn-comprar" onclick="gerarPix()">GARANTIR NÚMEROS</button>
 
-  <!-- ÁREA DO PIX -->
+  <!-- ✅ ÁREA DO PIX COM QR CODE GERANDO AUTOMATICAMENTE -->
   <div class="pix-area" id="pixArea">
     <h3>✅ Pagamento via Pix</h3>
     <div class="pix-box">
-      <div class="qr-code">QR Code<br>Pix</div>
+      <!-- QR Code Automático da Chave Pix -->
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=6de118d7-4af2-4520-bda0-e59ea5b41731" alt="QR Code Pix">
+      </div>
       <p><strong>Valor:</strong> <span id="valorPix">R$ 0,00</span></p>
       <p style="margin-top:15px;font-weight:bold;">Chave Pix:</p>
       <div class="chave-pix" id="chavePix">6de118d7-4af2-4520-bda0-e59ea5b41731</div>
@@ -145,7 +146,7 @@ input:focus{border-color:var(--primario)}
   </div>
 </section>
 
-<p class="link-painel"><a href="painel.html">🔐 Painel Administrativo</a></p>
+<!-- ✅ LINK DO PAINEL REMOVIDO — NINGUÉM VÊ! -->
 
 <script>
 const VALOR_COTA = 1.20;
