@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔐 Painel — Rifa do Gêmeos</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+:root{--primario:#e11d48;--sucesso:#16a34a;--alerta:#f59e0b;--perigo:#dc2626;--escuro:#1f2937;--fundo:#f3f4f6}
+body{background:var(--fundo);padding:15px;min-height:100vh}
+.container{max-width:1000px;margin:0 auto}
+
+header{background:#fff;padding:25px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:25px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+h1{color:var(--escuro);font-size:22px}
+.sair{color:#64748b;text-decoration:none;font-size:14px}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:25px}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid var(--primario)}
+.card-val{font-size:28px;font-weight:bold;color:var(--primario);margin-bottom:5px}
+.card-label{font-size:14px;color:#6b7280}
+.card.pendente{border-left-color:var(--alerta)}
+.card.liberado{border-left-color:var(--sucesso)}
+
+.filtros{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.filtro-btn{padding:10px 18px;background:#fff;border:none;border-radius:8px;font-size:14px;color:#4b5563;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.filtro-btn.ativo{background:var(--primario);color:#fff}
+
+.pedidos-section{background:#fff;padding:25px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.pedido{padding:20px;border-bottom:1px solid #e5e7eb}
+.pedido:last-child{border-bottom:none}
+.pedido-cabecalho{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.pedido-nome{font-weight:bold;font-size:17px;color:var(--escuro)}
+.pedido-tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.tag-pendente{background:#fef3c7;color:#92400e}
+.tag-liberado{background:#d1fae5;color:#065f46}
+.pedido-dados{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+@media(max-width:700px){.pedido-dados{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.pedido-dados{grid-template-columns:1fr}}
+.dado-label{font-size:12px;color:#9ca3af}
+.dado-valor{font-size:15px;color:var(--escuro)}
+.numeros-area{background:#f0fdf4;padding:12px;border-radius:8px;margin:12px 0}
+.numeros-titulo{font-size:14px;font-weight:bold;color:#166534;margin-bottom:8px}
+.numeros-lista{font-size:16px;font-weight:600;letter-spacing:2px;color:#166534}
+.acoes{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn-liberar{background:var(--sucesso);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-whatsapp{background:#25d366;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn-excluir{background:var(--perigo);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:bold;cursor:pointer}
+.vazio{text-align:center;padding:50px;color:#9ca3af}
+.notificacao{position:fixed;top:20px;right:20px;background:var(--sucesso);color:#fff;padding:15px 25px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:9999;display:none}
+
+@media(max-width:900px){
+  .cards{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .cards{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="notificacao" id="notif">🔔 Novo pedido recebido!</div>
+
+<div class="container">
+  <header>
+    <div>
+      <h1>🔐 Painel Administrativo</h1>
+      <p style="color:#6b7280;margin-top:5px">Rifa do Gêmeos — Controle de Pedidos</p>
+    </div>
+    <a href="index.html" class="sair">← Voltar ao Site</a>
+  </header>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-val" id="cardTotal">0</div>
+      <div class="card-label">Total Pedidos</div>
+    </div>
+    <div class="card pendente">
+      <div class="card-val" id="cardPendentes">0</div>
+      <div class="card-label">Pendentes</div>
+    </div>
+    <div class="card liberado">
+      <div class="card-val" id="cardLiberados">0</div>
+      <div class="card-label">Liberados</div>
+    </div>
+  </div>
+
+  <div class="filtros">
+    <button class="filtro-btn ativo" onclick="filtrar('todos')">Todos</button>
+    <button class="filtro-btn" onclick="filtrar('pendente')">Pendentes</button>
+    <button class="filtro-btn" onclick="filtrar('liberado')">Liberados</button>
+  </div>
+
+  <div class="pedidos-section">
+    <h2 style="margin-bottom:20px;color:var(--escuro)">📋 Pedidos</h2>
+    <div id="listaPedidos">
+      <p class="vazio">Nenhum pedido ainda.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let pedidos = JSON.parse(localStorage.getItem('pedidosRifa') || '[]');
+let filtroAtual = 'todos';
+
+// Escutar novos pedidos
+window.addEventListener('message', (event) => {
+  if(event.data.tipo === 'novoPedido') {
+    pedidos.unshift(event.data.pedido);
+    salvar();
+    renderizar();
+    atualizarCards();
+    mostrarNotificacao();
+  }
+});
+
+function mostrarNotificacao() {
+  const n = document.getElementById('notif');
+  n.style.display = 'block';
+  setTimeout(() => n.style.display = 'none', 5000);
+}
+
+// Gerar 6 números aleatórios únicos
+function gerarNumeros(qtd) {
+  const todos = [];
+  for(let i=0; i<qtd; i++) {
+    const nums = new Set();
+    while(nums.size < 6) {
+      nums.add(Math.floor(Math.random() * 100).toString().padStart(2,'0'));
+    }
+    todos.push(Array.from(nums).join(' - '));
+  }
+  return todos;
+}
+
+function liberarPedido(id) {
+  const pedido = pedidos.find(p => p.id === id);
+  if(!pedido) return;
+
+  pedido.status = 'liberado';
+  pedido.numeros = gerarNumeros(pedido.quantidade);
+  salvar();
+  renderizar();
+  atualizarCards();
+
+  // Abrir WhatsApp com mensagem pronta
+  const numerosTexto = pedido.numeros.map((n,i) => `Cota ${i+1}: ${n}`).join('\n');
+  const mensagem = `✅ Olá ${pedido.nome}! Seu pagamento foi confirmado! 🎉\n\nSeus números da sorte:\n${numerosTexto}\n\n📌 Sorteio pela Loteria Federal — Boa sorte!🍀`;
+  const url = `https://wa.me/55${pedido.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(mensagem)}`;
+  
+  setTimeout(() => window.open(url, '_blank'), 500);
+  alert('✅ Pedido liberado! O WhatsApp vai abrir com a mensagem pronta!');
+}
+
+function excluirPedido(id) {
+  if(!confirm('Tem certeza que deseja excluir?')) return;
+  pedidos = pedidos.filter(p => p.id !== id);
+  salvar();
+  renderizar();
+  atualizarCards();
+}
+
+function filtrar(status) {
+  filtroAtual = status;
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
+  event.target.classList.add('ativo');
+  renderizar();
+}
+
+function salvar() {
+  localStorage.setItem('pedidosRifa', JSON.stringify(pedidos));
+}
+
+function atualizarCards() {
+  document.getElementById('cardTotal').textContent = pedidos.length;
+  document.getElementById('cardPendentes').textContent = pedidos.filter(p => p.status === 'pendente').length;
+  document.getElementById('cardLiberados').textContent = pedidos.filter(p => p.status === 'liberado').length;
+}
+
+function renderizar() {
+  const el = document.getElementById('listaPedidos');
+  let filtrados = filtroAtual === 'todos' ? pedidos : pedidos.filter(p => p.status === filtroAtual);
+
+  if(filtrados.length === 0) {
+    el.innerHTML = '<p class="vazio">Nenhum pedido encontrado.</p>';
+    return;
+  }
+
+  el.innerHTML = filtrados.map(p => {
+    const numerosHtml = p.status === 'liberado' 
+      ? `<div class="numeros-area"><div class="numeros-titulo">🎯 Números Gerados:</div>${p.numeros.map((n,i) => `<div class="numeros-lista">Cota ${i+1}: ${n}</div>`).join('')}</div>`
+      : '';
+
+    return `
+      <div class="pedido">
+        <div class="pedido-cabecalho">
+          <div class="pedido-nome">${p.nome}</div>
+          <span class="pedido-tag ${p.status === 'pendente' ? 'tag-pendente' : 'tag-liberado'}">
+            ${p.status === 'pendente' ? '⏳ Pendente' : '✅ Liberado'}
+          </span>
+        </div>
+        <div class="pedido-dados">
+          <div>
+            <div class="dado-label">CPF</div>
+            <div class="dado-valor">${p.cpf}</div>
+          </div>
+          <div>
+            <div class="dado-label">WhatsApp</div>
+            <div class="dado-valor">${p.whatsapp}</div>
+          </div>
+          <div>
+            <div class="dado-label">Valor / Cotas</div>
+            <div class="dado-valor">R$ ${p.valor} / ${p.quantidade}x</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#9ca3af;margin-top:5px">${p.data}</div>
+        ${numerosHtml}
+        <div class="acoes">
+          ${p.status === 'pendente' 
+            ? `<button class="btn-liberar" onclick="liberarPedido(${p.id})">✅ Confirmar e Liberar</button>` 
+            : `<a class="btn-whatsapp" href="https://wa.me/55${p.whatsapp.replace(/\D/g,'')}" target="_blank">📱 Reenviar no Zap</a>`
+          }
+          <button class="btn-excluir" onclick="excluirPedido(${p.id})">🗑️ Excluir</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', () => {
+  renderizar();
+  atualizarCards();
+});
+</script>
+
+</body>
+</html>
