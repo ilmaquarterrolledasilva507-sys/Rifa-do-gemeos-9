@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+ DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -8,29 +8,31 @@
         *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
         body{background:#003370;min-height:100vh;padding-bottom:40px;color:white}
 
-        /* === TOPO COM IMAGEM === */
         .img-principal{width:92%;max-width:360px;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,.2);display:block;margin:20px auto 10px}
 
-        /* === PREÇO === */
         .preco-texto{text-align:center;font-size:22px;margin-bottom:10px;opacity:.95}
         .preco-caixa{background:white;color:#003370;font-size:42px;font-weight:bold;padding:12px 35px;border-radius:50px;display:table;margin:0 auto}
         .preco-por{text-align:center;font-size:18px;margin-top:8px;opacity:.9}
 
-        /* === BOTÕES DE QUANTIDADE FIXOS === */
+        .numeros-secao{padding:15px 20px;margin:10px 15px;background:rgba(255,255,255,.08);border-radius:16px}
+        .numeros-titulo{font-size:18px;font-weight:bold;margin-bottom:12px;text-align:center}
+        .numeros-box{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:80px;padding:10px;align-items:center}
+        .numero-sorte{background:white;color:#003370;padding:10px 14px;border-radius:8px;font-weight:bold;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,.15);animation:aparecer .3s ease}
+        @keyframes aparecer{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+
         .botoes-qtd{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:25px 20px}
         .btn-qtd{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);color:white;border-radius:14px;padding:15px 8px;font-size:20px;font-weight:bold;cursor:pointer;transition:all .2s;position:relative}
-        .btn-qtd.selecionado{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)}
+        .btn-qtd.selecionado{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5);transform:scale(1.05)}
         .btn-qtd.popular{background:#00aa44;border-color:#00cc55}
         .btn-qtd .qtd-valor{font-size:22px;font-weight:bold}
         .btn-qtd .qtd-texto{font-size:13px;opacity:.85;margin-top:4px}
         .tag-popular{position:absolute;top:-10px;right:-5px;background:#ff9500;color:white;font-size:11px;font-weight:bold;padding:3px 8px;border-radius:10px}
 
-        /* === SELETOR MANUAL === */
         .seletor-manual{display:flex;align-items:center;justify-content:center;gap:35px;margin:10px 0 30px}
-        .btn-manual{width:60px;height:60px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:white;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-        .valor-atual{font-size:38px;font-weight:bold}
+        .btn-manual{width:60px;height:60px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:white;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .btn-manual:active{transform:scale(.9)}
+        .valor-atual{font-size:38px;font-weight:bold;min-width:60px;text-align:center}
 
-        /* === SEÇÃO DADOS === */
         .dados-secao{background:white;color:#333;border-radius:25px 25px 0 0;padding:25px 20px;margin-top:10px}
         .dados-titulo{font-size:20px;font-weight:bold;margin-bottom:20px;display:flex;align-items:center;gap:8px}
         .form-group{margin-bottom:16px}
@@ -38,68 +40,69 @@
         input{width:100%;padding:14px;border:2px solid #eee;border-radius:10px;font-size:16px;background:#f9f9f9}
         input:focus{outline:none;border-color:#0066cc;background:#fff}
 
-        /* === BOTÃO COMPRAR === */
-        .btn-comprar{width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#00aa22,#00cc22);color:white;font-size:20px;font-weight:bold;cursor:pointer;margin-top:10px;box-shadow:0 4px 12px rgba(0,170,34,.3)}
-        .btn-comprar:disabled{background:#ccc;cursor:not-allowed}
+        .btn-comprar{width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#00aa22,#00cc22);color:white;font-size:20px;font-weight:bold;cursor:pointer;margin-top:10px;box-shadow:0 4px 12px rgba(0,170,34,.3);transition:transform .2s}
+        .btn-comprar:active{transform:scale(.98)}
+        .btn-comprar:disabled{background:#ccc;cursor:not-allowed;transform:none}
         .total-texto{text-align:center;font-size:22px;font-weight:bold;color:#003370;margin:15px 0}
 
-        /* === PIX === */
         .pix-area{margin-top:25px;text-align:center;display:none}
         .qr-img{width:250px;height:250px;margin:20px auto;border:1px solid #eee;border-radius:12px;padding:10px;background:white}
         .copy-btn{background:#0066cc;color:white;border:none;padding:12px 25px;border-radius:10px;font-size:17px;cursor:pointer;margin-top:10px}
         .status-box{padding:18px;border-radius:12px;margin-top:20px;display:none;font-size:16px;line-height:1.6}
         .waiting{background:#fff9cc;color:#856404;border:1px solid #ffe58f}
         .success{background:#e6ffed;color:#007029;border:1px solid #b7f0c8}
-        .painel-link{position:fixed;bottom:15px;right:15px;color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:5px}
+        .painel-link{position:fixed;bottom:10px;right:10px;font-size:14px;color:rgba(255,255,255,0.08);text-decoration:none;z-index:100}
     </style>
 </head>
 <body>
 
-    <!-- === IMAGEM PRINCIPAL === -->
     <img src="https://i.ibb.co/kVRx8YHN/Screenshot-20260903-125215-Instagram-Lite-1.webp" alt="Prêmios" class="img-principal">
 
-    <!-- === PREÇO === -->
     <p class="preco-texto">Por apenas</p>
     <div class="preco-caixa">R$ 1,20</div>
     <p class="preco-por">por cota</p>
 
-    <!-- === BOTÕES DE QUANTIDADE FIXOS === -->
     <div class="botoes-qtd">
-        <button class="btn-qtd" data-qtd="1" onclick="escolherQtd(1, this)">
+        <button type="button" class="btn-qtd" data-qtd="1">
             <div class="qtd-valor">+1</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
-        <button class="btn-qtd" data-qtd="2" onclick="escolherQtd(2, this)">
+        <button type="button" class="btn-qtd" data-qtd="2">
             <div class="qtd-valor">+2</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
-        <button class="btn-qtd popular" data-qtd="3" onclick="escolherQtd(3, this)">
+        <button type="button" class="btn-qtd popular" data-qtd="3">
             <span class="tag-popular">POPULAR</span>
             <div class="qtd-valor">+3</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
-        <button class="btn-qtd" data-qtd="5" onclick="escolherQtd(5, this)">
+        <button type="button" class="btn-qtd" data-qtd="5">
             <div class="qtd-valor">+5</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
-        <button class="btn-qtd" data-qtd="10" onclick="escolherQtd(10, this)">
+        <button type="button" class="btn-qtd" data-qtd="10">
             <div class="qtd-valor">+10</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
-        <button class="btn-qtd" data-qtd="15" onclick="escolherQtd(15, this)">
+        <button type="button" class="btn-qtd" data-qtd="15">
             <div class="qtd-valor">+15</div>
             <div class="qtd-texto">Selecionar</div>
         </button>
     </div>
 
-    <!-- === SELETOR MANUAL === -->
     <div class="seletor-manual">
-        <button class="btn-manual" onclick="alterar(-1)">−</button>
+        <button type="button" class="btn-manual" id="btn-menos">−</button>
         <span class="valor-atual" id="qty">0</span>
-        <button class="btn-manual" onclick="alterar(1)">+</button>
+        <button type="button" class="btn-manual" id="btn-mais">+</button>
     </div>
 
-    <!-- === SEÇÃO DADOS === -->
+    <div class="numeros-secao">
+        <div class="numeros-titulo">🎟️ Seus Números</div>
+        <div class="numeros-box" id="numerosGerados">
+            <span style="opacity:.7">Escolha a quantidade acima...</span>
+        </div>
+    </div>
+
     <div class="dados-secao">
         <div class="dados-titulo">📝 Seus Dados</div>
 
@@ -118,15 +121,14 @@
 
         <div class="total-texto" id="total">Total: R$ 0,00</div>
 
-        <button class="btn-comprar" id="btnComprar" onclick="comprar()">💳 Gerar Pix e Comprar</button>
+        <button type="button" class="btn-comprar" id="btnComprar">💳 Gerar Pix e Comprar</button>
 
-        <!-- === ÁREA DO PIX === -->
         <div class="pix-area" id="pixArea">
             <h3 style="color:#333;margin-bottom:10px">✅ Pagamento via Pix</h3>
             <p style="color:#666;margin-bottom:15px">Escaneie o QR Code ou copie o código Pix</p>
             <img id="qrImg" class="qr-img" src="" alt="QR Code Pix">
             <input type="text" id="pixCode" style="display:none">
-            <button class="copy-btn" onclick="copiarPix()">📋 Copiar Código Pix</button>
+            <button type="button" class="copy-btn" id="btn-copiar-pix">📋 Copiar Código Pix</button>
             <p style="margin-top:15px;font-weight:bold;font-size:18px">Valor: <span id="valorPix">R$ 0,00</span></p>
             
             <div class="status-box waiting" id="waitingBox">
@@ -140,50 +142,83 @@
         </div>
     </div>
 
-    <a href="painel.html" class="painel-link">🔒 Painel</a>
+    <a href="painel.html" class="painel-link">🔒</a>
 
     <script>
+        // ✅ VARIÁVEIS GLOBAIS
         let qtd = 0;
         const VALOR_UNIT = 1.20;
         let pollingInterval;
         let ultimoBotao = null;
+        let numerosGeradosLista = [];
 
-        // === BOTÕES FIXOS (+1, +2, +3...) ===
+        // ✅ GERAR NÚMEROS ALEATÓRIOS (6 dígitos)
+        function gerarNumeros(quantidade) {
+            const numeros = new Set();
+            const limite = 900000;
+
+            if (quantidade <= 0) return [];
+            if (quantidade > limite) {
+                throw new Error('Quantidade de números solicitada é muito grande.');
+            }
+
+            while (numeros.size < quantidade) {
+                const n = Math.floor(Math.random() * 900000) + 100000;
+                numeros.add(n);
+            }
+
+            return Array.from(numeros).sort((a, b) => a - b);
+        }
+
+        // ✅ FUNÇÃO PRINCIPAL — ATUALIZA TUDO
+        function atualizarTela() {
+            const container = document.getElementById('numerosGerados');
+            const totalEl = document.getElementById('total');
+            const qtyEl = document.getElementById('qty');
+
+            if (qtyEl) qtyEl.textContent = qtd;
+            if (totalEl) {
+                const total = (qtd * VALOR_UNIT).toFixed(2).replace('.', ',');
+                totalEl.textContent = `Total: R$ ${total}`;
+            }
+
+            if (!container) return;
+            if (qtd === 0) {
+                container.innerHTML = '<span style="opacity:.7">Escolha a quantidade acima...</span>';
+                numerosGeradosLista = [];
+                return;
+            }
+            
+            numerosGeradosLista = gerarNumeros(qtd);
+            container.innerHTML = numerosGeradosLista.map(n => 
+                `<span class="numero-sorte">${n}</span>`
+            ).join('');
+        }
+
+        // ✅ SELECIONA QUANTIDADE FIXA
         function escolherQtd(valor, botao) {
             qtd = valor;
-            document.getElementById('qty').textContent = qtd;
-            atualizarTotal();
-            
-            // Marca o botão selecionado
             document.querySelectorAll('.btn-qtd').forEach(b => b.classList.remove('selecionado'));
             botao.classList.add('selecionado');
             ultimoBotao = botao;
+            atualizarTela();
         }
 
-        // === SELETOR MANUAL ===
+        // ✅ ALTERA QUANTIDADE MANUALMENTE
         function alterar(delta) {
             qtd = Math.max(0, qtd + delta);
-            document.getElementById('qty').textContent = qtd;
-            atualizarTotal();
-            
-            // Desmarca botões fixos ao usar manual
-            if(ultimoBotao && delta !== 0) {
+            if (ultimoBotao) {
                 document.querySelectorAll('.btn-qtd').forEach(b => b.classList.remove('selecionado'));
                 ultimoBotao = null;
             }
-        }
-
-        // === CÁLCULO DO TOTAL ===
-        function atualizarTotal() {
-            const total = (qtd * VALOR_UNIT).toFixed(2).replace('.', ',');
-            document.getElementById('total').textContent = `Total: R$ ${total}`;
+            atualizarTela();
         }
 
         function formatarCPF(i) {
             let v = i.value.replace(/\D/g,'');
             v = v.replace(/(\d{3})(\d)/, '$1.$2');
             v = v.replace(/(\d{3})(\d)/, '$1.$2');
-            v = v.replace(/(\d{3})(\d{1,2})$,'$1-$2');
+            v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
             i.value = v;
         }
 
@@ -211,7 +246,9 @@
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                        nome, cpf, whatsapp, quantidade: qtd, valorTotal: qtd * VALOR_UNIT
+                        nome, cpf, whatsapp, quantidade: qtd, 
+                        valorTotal: qtd * VALOR_UNIT,
+                        numeros: numerosGeradosLista
                     })
                 });
                 const data = await response.json();
@@ -249,6 +286,58 @@
                 }
             } catch(e) {}
         }
+
+        // ✅ INICIALIZAÇÃO — TODOS OS EVENTOS CONECTADOS AQUI!
+        document.addEventListener('DOMContentLoaded', function() {
+            atualizarTela();
+
+            // Botões fixos (+1, +2, +3...)
+            document.querySelectorAll('.btn-qtd').forEach(botao => {
+                botao.addEventListener('click', function() {
+                    const valor = parseInt(this.getAttribute('data-qtd'));
+                    escolherQtd(valor, this);
+                });
+            });
+
+            // Botões manual (+ / -)
+            document.getElementById('btn-menos').addEventListener('click', () => alterar(-1));
+            document.getElementById('btn-mais').addEventListener('click', () => alterar(1));
+
+            // Botão comprar
+            document.getElementById('btnComprar').addEventListener('click', comprar);
+
+            // Botão copiar Pix
+            document.getElementById('btn-copiar-pix').addEventListener('click', copiarPix);
+
+            // Atalhos de teclado para facilitar o uso no celular/computador.
+            document.addEventListener('keydown', function(event) {
+                // Não interfere quando o usuário está digitando nos campos.
+                const tag = document.activeElement?.tagName;
+                if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+                if (event.key === '+' || event.key === '=') {
+                    event.preventDefault();
+                    alterar(1);
+                } else if (event.key === '-' || event.key === '_') {
+                    event.preventDefault();
+                    alterar(-1);
+                } else if (event.key === '1' || event.key === '2' ||
+                           event.key === '3' || event.key === '5' ||
+                           event.key === '0') {
+                    const mapa = {'1': 1, '2': 2, '3': 3, '5': 5, '0': 10};
+                    const valor = mapa[event.key];
+                    const botao = document.querySelector(`.btn-qtd[data-qtd="${valor}"]`);
+                    if (botao) escolherQtd(valor, botao);
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    alterar(1);
+                } else if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    alterar(-1);
+                }
+            });
+        });
     </script>
 </body>
 </html>
+  
